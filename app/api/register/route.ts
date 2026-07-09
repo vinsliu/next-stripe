@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
+import {
+  isValidEmail,
+  isValidPassword,
+  PASSWORD_REQUIREMENTS_MESSAGE,
+} from "@/lib/validation";
 
 export async function POST(request: Request) {
   const { name, email, password } = await request.json();
@@ -8,6 +13,20 @@ export async function POST(request: Request) {
   if (!email || !password) {
     return NextResponse.json(
       { error: "Email et mot de passe requis." },
+      { status: 400 }
+    );
+  }
+
+  if (!isValidEmail(email)) {
+    return NextResponse.json(
+      { error: "Adresse email invalide." },
+      { status: 400 }
+    );
+  }
+
+  if (!isValidPassword(password)) {
+    return NextResponse.json(
+      { error: PASSWORD_REQUIREMENTS_MESSAGE },
       { status: 400 }
     );
   }

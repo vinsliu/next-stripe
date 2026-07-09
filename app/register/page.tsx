@@ -4,6 +4,12 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PasswordInput } from "@/components/PasswordInput";
+import {
+  isValidEmail,
+  isValidPassword,
+  PASSWORD_REQUIREMENTS_MESSAGE,
+} from "@/lib/validation";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -15,8 +21,19 @@ export default function RegisterPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
     setError(null);
+
+    if (!isValidEmail(email)) {
+      setError("Adresse email invalide.");
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError(PASSWORD_REQUIREMENTS_MESSAGE);
+      return;
+    }
+
+    setLoading(true);
 
     const res = await fetch("/api/register", {
       method: "POST",
@@ -71,15 +88,16 @@ export default function RegisterPage() {
           required
           className="rounded border border-black/10 px-3 py-2"
         />
-        <input
-          type="password"
+        <PasswordInput
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           minLength={8}
+          title={PASSWORD_REQUIREMENTS_MESSAGE}
           className="rounded border border-black/10 px-3 py-2"
         />
+        <p className="text-xs text-zinc-500">{PASSWORD_REQUIREMENTS_MESSAGE}</p>
         <button
           type="submit"
           disabled={loading}

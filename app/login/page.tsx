@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -50,8 +51,7 @@ export default function LoginPage() {
           required
           className="rounded border border-black/10 px-3 py-2"
         />
-        <input
-          type="password"
+        <PasswordInput
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
