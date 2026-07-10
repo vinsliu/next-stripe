@@ -70,7 +70,7 @@ Remplace uniquement les valeurs suivantes :
 
 - `STRIPE_SECRET_KEY` : une clé de test Stripe. Elle se récupère sur https://dashboard.stripe.com/test/apikeys (il faut un compte Stripe, gratuit). Elle commence toujours par `sk_test_`.
 - `STRIPE_WEBHOOK_SECRET` : cette valeur sera obtenue à l'étape 7. Pour l'instant, laisse-la telle quelle.
-- `NEXTAUTH_SECRET` : remplace `remplace-moi-par-nimporte-quoi` par n'importe quelle suite de caractères (peu importe laquelle, il n'y a pas de piège).
+- `NEXTAUTH_SECRET` : remplace `remplace-moi-par-nimporte-quoi` par n'importe quelle suite de caractères (peu importe laquelle, il n'y a pas de piège. Exemple : code1secret2next3auth).
 
 **Ne partage jamais ce fichier `.env` publiquement** (il contient des clés secrètes).
 
@@ -113,7 +113,6 @@ L'application doit s'afficher. **Laisse ce terminal ouvert** pendant toute la du
 Cette étape est nécessaire pour que l'abonnement Premium et l'historique des commandes se mettent à jour automatiquement après un paiement.
 
 1. Installe l'outil Stripe CLI :
-   - Sur Mac : `brew install stripe/stripe-cli/stripe`
    - Sur Windows/Linux : voir https://docs.stripe.com/stripe-cli#install
 
 2. Ouvre un **nouveau terminal** (sans fermer celui de l'étape 6), place-toi dans le dossier du projet, et tape :
