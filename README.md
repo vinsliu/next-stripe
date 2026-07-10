@@ -184,6 +184,21 @@ npm run dev
 - Si l'achat et l'abonnement fonctionnent comme décrit ci-dessus, l'application fonctionne correctement.
 - Dans le terminal `stripe listen` (étape 7), on doit voir des lignes `[200] POST .../api/webhooks/stripe` après chaque paiement : ça confirme que la notification a bien été reçue et traitée par l'application.
 
+### 8.5 — Voir les données enregistrées en base (optionnel)
+
+Pour vérifier directement dans la base de données que les comptes, commandes et abonnements sont bien enregistrés :
+
+1. Ouvre un **nouveau terminal**, place-toi dans le dossier du projet.
+2. Copie-colle :
+
+```bash
+npx prisma studio
+```
+
+3. Une page s'ouvre automatiquement dans le navigateur (en général à l'adresse http://localhost:5555). Elle affiche les tables `User` (comptes, avec la colonne `isPremium`) et `Order` (commandes).
+
+Tu peux fermer cet outil à tout moment avec `Ctrl` + `C` dans son terminal, ça n'affecte pas le reste de l'application.
+
 ---
 
 ## En cas de blocage
